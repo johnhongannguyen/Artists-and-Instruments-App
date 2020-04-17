@@ -7,6 +7,7 @@ import ListItemText from '@material-ui/core/ListItemText'
 import { makeStyles } from '@material-ui/core/styles'
 
 import RemoveArtist from '../buttons/RemoveArtist'
+import UpdateArtist from '../forms/UpdateArtist'
 import DisplayCard from '../cards/DisplayCard'
 
 const useStyles = makeStyles({
@@ -15,17 +16,47 @@ const useStyles = makeStyles({
   }
 })
 
-const Artist = () => {
+const Artist = props => {
+  const [id] = useState(props.id)
+  const[firstName, setFirstName]= useState(props.firstName)
+  const[lastName, setLastName] = useState(props.lastName)
+  const [editMode, setEditMode] = useState(false)
+  const handleButtonClick = () =>{
+    setEditMode(!editMode)
+
+  }
+
+  const fullName = () =>{
+    return `${firstName} ${lastName}`
+  }
+
   const classes = useStyles()
   return (
+    <div>
+      {editMode ? (
+        <UpdateArtist 
+        id ={props.id}
+        firstName ={props.firstName}
+        lastName={props.lastName}
+        onButtonClick={handleButtonClick}
+        />
+      ):(
     <DisplayCard>
       <Fragment>
         <ListItem>
-          <ListItemText primary={'John Smith'} />
-          <Button variant='contained' style={{ margin: '5px' }}>
+          <ListItemText primary={fullName()} />
+          <Button 
+          onClick={() => setEditMode(true)}
+          variant='contained' 
+          style={{ margin: '5px' }}
+          >
             Edit
           </Button>
-          <RemoveArtist />
+          <RemoveArtist 
+          id={props.id}
+          firstName={props.firstName}
+          lastName={props.lastName}
+          />
         </ListItem>
         <CardActions>
           <Button color='primary' size='small' variant='outlined'>
@@ -34,6 +65,8 @@ const Artist = () => {
         </CardActions>
       </Fragment>
     </DisplayCard>
+      )}
+    </div>
   )
 }
 
