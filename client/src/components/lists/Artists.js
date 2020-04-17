@@ -7,11 +7,10 @@ import List from '@material-ui/core/List'
 import Artist from '../listItems/Artist'
 
 const Artists = () =>{
-    const {loading, error,data} = useQuery(GET_ARTISTS)
+    const {loading,error,data} = useQuery(GET_ARTISTS)
     if(loading) return 'Loading...'
     if(error) return `Error !!! ${error.message}`
     console.log('data',data)
-
     return(
         <ul>
             {data.artists.map(({id,firstName,lastName})=>{

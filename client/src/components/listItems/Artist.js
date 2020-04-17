@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/core/styles'
 
 import RemoveArtist from '../buttons/RemoveArtist'
 import UpdateArtist from '../forms/UpdateArtist'
-import DisplayCard from '../cards/DisplayCard'
+// import DisplayCard from '../cards/DisplayCard'
 
 const useStyles = makeStyles({
   label: {
