@@ -164,6 +164,19 @@ const resolvers = {
         return a.id === removedArtist.id
       })
       return removedArtist
+    },
+
+    updateInstrument: (root,args)=>{
+      const instrument = find(instruments, {id:args.id});
+      if(!instrument){
+        throw new Error(`Could not find instrument with id ${args.id}`)
+      }
+      instrument.year = args.year;
+      instrument.brand = args.brand;
+      instrument.type = args.type;
+      instrument.price = args.price;
+      instrument.artistId = args.artistId;
+      return instrument
     }
   }
 }
